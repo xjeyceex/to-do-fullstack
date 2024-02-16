@@ -1,0 +1,152 @@
+body{
+  background-image: url("../public/wp.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+*{
+  color: wheat;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+  }
+
+  .savedtask-container {
+    height: 93vh; 
+    overflow-y: auto;
+    width: 35%;
+    border-right: 1.5px solid rgba(255, 255, 255, 0.63);
+  }
+  
+  .newtask-container {
+    width: 60%;
+    height: 90vh;
+    margin-left: 75vh;
+    position: fixed;
+  }
+  
+  .textarea{
+    height: 60vh;
+    
+  }
+
+  .newtask {
+    margin-top: 20px;
+  }
+  
+  .newtask label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .newtask input[type="text"],
+  .newtask textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+
+  
+  .newtask button {
+    padding: 8px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .newtask button:hover {
+    background-color: #0077A3;
+  }
+  
+  .newtask-btn {
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .newtask-btn:hover {
+    background-color: #0077A3;
+  }
+
+  .edit{
+    padding: 8px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: rgb(0, 151, 211);
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+  .delete{
+    padding: 8px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: rgb(37, 37, 37);
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+  .delete:hover{
+    background-color: #000000;
+  }
+  .edit:hover {
+    background-color: rgb(0, 126, 175);
+  }
+
+  
+
+  #cardbox{
+    background-color: #590064f3;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgb(134, 10, 128);
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .saved-container {
+    background-color: rgba(0, 0, 0, 0.836);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgb(134, 10, 128);
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .saved-container h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333333;
+  }
+  
+  .saved-container ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .transparent-input {
+    font-size: 17px;
+    background-color: rgba(36, 82, 83, 0.863);
+    border: 1px solid #ccc; /* Add a border for visibility */
+    padding: 15px;
+    color: #ffffff; /* Ensure text is visible */
+    border-radius: 5px;
+  }
+  
+  .saved-container li {
+    margin-bottom: 10px;
+  }
+  
+  .saved-container .todo-name {
+    font-weight: bold;
+  }
+  
+  .saved-container .todo-details {
+    color: #666666;
+  }

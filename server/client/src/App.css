@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Fonts */
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e0b587; /* Sand Tan */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c89666; /* Sand Tan Shadow */
+}
+
+/* Body */
+body {
+  background-image: linear-gradient(to bottom right, #e1b382, #2d545e, #12343b); /* Sand Tan, Night Blue, Night Blue Shadow */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #ffffff; /* Wheat */
+}
+
+/* Container */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 20px;
+}
+
+.container h1 {
+  margin-left: 120px;
+  margin-top: 0px;
+  position: absolute;
+}
+
+/* Saved Task Container */
+.savedtask-container {
+  height: 85vh; 
+  overflow-y: auto;
+  width: 35%;
+  margin-top: 50px;
+}
+
+/* Textarea */
+.textarea {
+  height: 60vh;
+}
+
+/* New Task */
+.newtask {
+  margin-top: 50px;
+  display: flex;
+  width: 128vh;
+  height: 80vh;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.newtask label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.newtask input[type="text"],
+.newtask textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.newtask button {
+  display: inline-block;
+  padding: 8px 16px;
+  cursor: pointer;
+  width: 12vh;
+  background-color: #1eaf78; /* Sand Tan Shadow */
+  color: #ffffff; /* Night Blue */
+  border: none;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-bottom: 8px;
+}
+
+.newtask button:hover {
+  background-color: #1eaa74; /* Darker shade of Sand Tan Shadow */
+}
+
+.newtask h1 {
+  margin-left: 40vh;
+  margin-top: -50px; 
+}
+
+.newtask-btn {
+  padding: 8px 16px;
+  cursor: pointer;
+  width: 50vh;
+  font-size: 20px;
+  /* height: 7vh; */
+  background-color: #28df99; /* Sand Tan Shadow */
+  color: #ffffff; /* Night Blue */
+  border: none;
+  border-radius: 15px;
+  margin: 0 auto;
+}
+
+.newtask-btn:hover {
+  background-color: #1eaa74; /* Darker shade of Sand Tan Shadow */
+}
+
+/* Edit and Delete Buttons */
+.edit {
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #008CBA; /* Night Blue */
+  color: #ffffff; /* White */
+  border: none;
+  border-radius: 4px;
+}
+.delete {
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #C70000; /* Night Blue */
+  color: #ffffff; /* White */
+  border: none;
+  border-radius: 4px;
+}
+
+.done{
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #00ba4d; /* Night Blue */
+  color: #ffffff; /* White */
+  border: none;
+  border-radius: 4px;
+}
+
+.unfinished{
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #fd2121; /* Night Blue */
+  color: #ffffff; /* White */
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-container{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end; 
+  margin-left: 102.5vh;
+}
+
+.edit:hover {
+  background-color: #0077A3; /* Darker shade of Night Blue */
+}
+
+.delete:hover {
+  background-color: #000000; /* Black */
+}
+
+/* Card Box */
+#cardbox {
+  background-color: #28df99da; /* Sand Tan Shadow with alpha */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px #28df99; /* Sand Tan Shadow */
+  padding: 20px;
+  color: #000000; /* Black */
+  margin: 20px;
+}
+
+#cardbox h3,
+#cardbox h4,
+#cardbox p,
+#cardbox h6 {
+  color: #141414; /* Dark Gray */
+}
+
+#cardbox h3 {
+  text-align: center;
+}
+
+#cardbox p {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px; 
+}
+
+/* Saved Container */
+.saved-container {
+  background-color: rgba(0, 0, 0, 0.836); /* Night Blue with alpha */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px #2c2c2c; /* Night Blue Shadow */
+  padding: 20px;
+  margin: 20px;
+  overflow-y: visible;
+  word-wrap: break-word;
+  min-height: 200px;
+}
+
+.saved-container h3 {
+  text-align: center;
+}
+
+.saved-container h1 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333333; /* Dark Gray */
+}
+
+.saved-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.transparent-input {
+  font-size: 17px;
+  background-color: rgba(36, 82, 83, 0.863);
+  border: 1px solid rgba(36, 82, 83, 0.863);
+  padding: 15px;
+  color: #ffffff; /* White */
+  border-radius: 5px;
+}
+
+.saved-container li {
+  margin-bottom: 10px;
+}
+
+.saved-container .todo-name {
+  font-weight: bold;
+}
+
+.saved-container .todo-details {
+  color: #666666; /* Gray */
+}

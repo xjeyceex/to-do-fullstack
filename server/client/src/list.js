@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faEdit, faCheck, faTimes, faL } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit, faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 
 const ListTodos = () => {
@@ -13,86 +13,96 @@ const ListTodos = () => {
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [abortController, setAbortController] = useState(null);
 
   const getTodos = async () => {
     setLoading(true);
-    const controller = new AbortController();
-    setAbortController(controller);
-
     try {
-      const response = await fetch("/get/todo", {
-        signal: controller.signal
-      });
+      const response = await fetch("/get/todo");
       if (response.ok) {
         const jsonData = await response.json();
         setTodos(jsonData);
-      } else {
+      } 
+      else {
         throw new Error('Failed to fetch todos');
       }
-    } catch (err) {
+    } 
+    catch (err) {
       setError(err.message);
-    } finally {
+    } 
+    finally {
       setLoading(false);
     }
   };
 
   const handleAddTask = async (e) => {
     e.preventDefault();
-    if (description.trim() !== "" && taskname.trim() !== "") {
-      try {
+
+    if (description.trim() === "" || taskname.trim() === "") {
+        alert('Task name and description are required.');
+        return;
+    }
+
+    try {
         setLoading(true);
         const body = { taskname, description };
         const response = await fetch("/add/todo", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body)
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
         });
+
         if (response.ok) {
-          setDescription("");
-          setTaskName("");
-          setShowForm(true);
-          getTodos();
-          alert('Task successfully added');
-        } else {
-          throw new Error('Failed to add task');
+            setDescription("");
+            setTaskName("");
+            setShowForm(true);
+            getTodos();
+            alert('Task successfully added');
+        } 
+        else {
+            throw new Error('Failed to add task');
         }
-      } catch (err) {
+    } 
+    catch (err) {
         setError(err.message);
+    } 
+    finally {
         setLoading(false);
-      }
-    } else {
-      alert('Task name and description are required.');
     }
-  };
+};
 
   const handleUpdateTask = async () => {
     if (description.trim() === "" || taskname.trim() === "" || editTodoId === null) {
       alert('Task name and description are required.');
-    } else {
-      try {
-        setLoading(true);
-        const body = { taskname, description };
-        const response = await fetch(`/update/${editTodoId}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body)
-        });
-        if (response.ok) {
-          setDescription("");
-          setTaskName("");
-          setEditMode(false);
-          setEditTodoId(null);
-          setShowForm(true);
-          getTodos();
-        } else {
-          throw new Error('Failed to update task');
-        }
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
+      return
+    } 
+
+    try {
+      setLoading(true);
+      const body = { taskname, description };
+      const response = await fetch(`/update/${editTodoId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+      if (response.ok) {
+        setDescription("");
+        setTaskName("");
+        setEditMode(false);
+        setEditTodoId(null);
+        setShowForm(true);
+        getTodos();
+      } 
+      else {
+        throw new Error('Failed to update task');
       }
+    } 
+    catch (err) {
+      setError(err.message);
+    } 
+    finally {
+      setLoading(false);
     }
+  
   };
 
   const handleEditTodo = (id, taskname, description) => {
@@ -115,12 +125,16 @@ const ListTodos = () => {
       });
 
       if (response.ok) {
-        getTodos();
-      } else {
+        await getTodos();
+      } 
+      else {
         throw new Error('Failed to delete task');
       }
-    } catch (err) {
+    }
+    catch (err) {
       setError(err.message);
+    } 
+    finally {
       setLoading(false);
     }
   };
@@ -128,32 +142,30 @@ const ListTodos = () => {
   const handleTodoStatus = async (id, done) => {
     try {
       setLoading(true);
-      const response = await fetch(`/markdone/${id}?done=${done}`);
+      const response = await fetch(`/markdone/${id}?done=${done}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id, done })
+      });
       if (response.ok) {
-        await response.json();
-        getTodos();
+        await getTodos();
       } else {
         throw new Error('Failed to update todo status');
       }
     } catch (err) {
       setError(err.message);
+    } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
     getTodos();
-
-    // Cleanup function to abort fetch when component unmounts or before fetching again
-    return () => {
-      if (abortController) {
-        abortController.abort();
-        setAbortController(null);
-      }
-    };
   }, []);
 
-  const handleCancel = () =>{
+  const handleCancel = () => {
     setEditMode(false);
     setShowForm(false);
     setDescription("");
@@ -168,8 +180,12 @@ const ListTodos = () => {
 
   return (
     <div className="container">
-      {loading && <p>Loading...</p>}
-
+      {loading && (
+        <div className="loading-spinner">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      )}
       {/* Saved Task Section */}
       <h1>Saved Tasks</h1>
       <div className="savedtask-container">
@@ -191,13 +207,13 @@ const ListTodos = () => {
             </button>
             {todo.markdone === false ? (
               <button onClick={() => handleEditTodo(todo.todo_id, todo.taskname, todo.description)} className="edit">
-              <FontAwesomeIcon icon={faEdit} style={{ color: 'white'}} />
-            </button>
+                <FontAwesomeIcon icon={faEdit} style={{ color: 'white' }} />
+              </button>
             ) : ""}
             {todo.markdone === false ? (
               <button className='done' onClick={() => handleTodoStatus(todo.todo_id, true)}><FontAwesomeIcon icon={faCheck} /></button>
             ) : (
-              <button className='unfinished' onClick={() => handleTodoStatus(todo.todo_id, false)}><FontAwesomeIcon icon={faTimes}/></button>
+              <button className='unfinished' onClick={() => handleTodoStatus(todo.todo_id, false)}><FontAwesomeIcon icon={faTimes} /></button>
             )}
           </div>
         ))}
@@ -235,15 +251,9 @@ const ListTodos = () => {
               if (description.trim() !== "" || taskname.trim() !== "") {
                 const confirmation = window.confirm('Are you sure you want to cancel?');
                 if (!confirmation) return;
-                setEditMode(false);
-                setShowForm(false);
-                setDescription("");
-                setTaskName("");
+                handleCancel();
               } else {
-                setEditMode(false);
-                setShowForm(false);
-                setDescription("");
-                setTaskName("");
+                handleCancel();
               }
             }}>Cancel</button>
           </div>
